@@ -2,7 +2,19 @@
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
 # Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+
+# Fixes the 'get :compare' indentation
+Layout/IndentationWidth:
+  Width: 2
+
+# Fixes the 'end' alignment (The valid version of what failed before)
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: start_of_line
+
+# Ensures consistent spacing throughout the block
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
+
+# Optional: your existing preference
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
