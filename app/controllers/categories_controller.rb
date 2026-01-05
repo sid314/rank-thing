@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
   end
   def show
   @category = Category.find(params[:id])
+  @items = @category.items.order(ranking: :desc)
   end
   def new
   @category = Category.new
