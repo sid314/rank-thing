@@ -1,0 +1,15 @@
+<h1>Compare</h1>
+<ul>
+  <% @items.each do |item| %>
+    <li>
+      <%= button_to item.name,
+      vote_category_path(@category),
+      params: {
+        winner_id: item.id,
+        loser_id: (@items - [item]).first.id,
+      },
+      method: :post %>
+    </li>
+
+  <% end %>
+</ul>

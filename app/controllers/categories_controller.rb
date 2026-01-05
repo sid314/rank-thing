@@ -36,6 +36,21 @@ class CategoriesController < ApplicationController
     flash[:notice] = "Category deleted successfully"
     redirect_to categories_path
   end
+def compare
+  @category = Category.find(params[:id])
+  @items = @category.items.sample(2).sort_by(&:ranking).reverse
+  if @items.size < 2
+      redirect_to categories_path, alert: "Not enough items to compare"
+  end
+end
+def vote
+  @category = Category.find(params[:id])
+  winner = Item.find(params[:winner_id])
+  loser = Item.find(params[:loser_id])
+  Item.update_rankings(winner, loser)
+
+  redirect_to compare_category_path(@category), notice: "Vote recorded!"
+end
   def category_params
     params.require(:category).permit(:name)
   end
