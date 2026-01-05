@@ -1,3 +1,10 @@
 <h1><%= @category.name %></h1>
-Details coming soon
+<ul>
+  <% @category.items.each do |item| %>
+    <li>
+      <%= link_to item.name, item_path(item) %>
+
+    </li>
+  <% end %>
+</ul>
 <%= button_to "Delete category", category_path(@category), method: :delete %>

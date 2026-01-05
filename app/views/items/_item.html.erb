@@ -8,5 +8,9 @@
     <strong>Ranking:</strong>
     <%= item.ranking %>
   </div>
+  <div>
+    <strong>Category:</strong>
+    <%= link_to item.category.name, category_path(item.category) %>
+  </div>
 
 </div>
