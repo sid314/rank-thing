@@ -1,16 +1,18 @@
-<div id="<%= dom_id item %>">
-  <div>
-    <strong>Name:</strong>
-    <%= item.name %>
+<div id="<%= dom_id item %>" class="space-y-4">
+  <div class="border-b border-gray-100 pb-4">
+    <dt class="text-sm font-medium text-gray-500 uppercase tracking-wider">Item Name</dt>
+    <dd class="mt-1 text-2xl font-bold text-gray-900"><%= item.name %></dd>
   </div>
 
-  <div>
-    <strong>Ranking:</strong>
-    <%= item.ranking %>
+  <div class="flex items-center space-x-3">
+    <dt class="text-sm font-medium text-gray-500">Rating:</dt>
+    <dd
+      class="
+        inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
+        bg-indigo-100 text-indigo-700
+      "
+    >
+      #<%= item.ranking %>
+    </dd>
   </div>
-  <div>
-    <strong>Category:</strong>
-    <%= link_to item.category.name, category_path(item.category) %>
-  </div>
-
 </div>

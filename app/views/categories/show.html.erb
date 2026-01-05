@@ -1,12 +1,188 @@
-<h1><%= @category.name %></h1>
-<ul>
-  <% @items.each do |item| %>
-    <li>
-      <%= link_to item.name, item_path(item) %>
+<%# app/views/categories/show.html.erb %>
 
-    </li>
-  <% end %>
-</ul>
-<%= link_to "New Item", new_item_path %>
-<%= button_to "Start Comparison", compare_category_path(@category), method: :get %>
-<%= button_to "Delete category", category_path(@category), method: :delete %>
+<div class="max-w-3xl mx-auto p-6">
+  <%# Header Section %>
+  <div
+    class="
+      flex flex-col md:flex-row md:items-start md:justify-between mb-10 gap-6
+    "
+  >
+    <div>
+      <nav class="mb-2">
+        <%= link_to categories_path, class: "group text-xs font-bold text-indigo-600 uppercase tracking-widest hover:text-indigo-700 flex items-center" do %>
+          <svg
+            class="
+              mr-1 h-3 w-3 transition-transform group-hover:-translate-x-1
+            "
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
+          </svg>
+          All Categories
+        <% end %>
+      </nav>
+      <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight"><%= @category.name %></h1>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3">
+      <%# Edit Category Button %>
+      <%= link_to edit_category_path(@category), 
+          class: "inline-flex items-center px-4 py-2.5 border border-gray-300 text-sm font-bold rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-50 transition-all active:scale-95" do %>
+        <svg
+          class="mr-2 h-4 w-4 text-gray-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+          />
+        </svg>
+        Edit
+      <% end %>
+
+      <%# Compare Button %>
+      <%= link_to compare_category_path(@category), 
+          class: "inline-flex items-center px-4 py-2.5 border border-gray-300 text-sm font-bold rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-50 transition-all active:scale-95" do %>
+        <svg
+          class="mr-2 h-4 w-4 text-gray-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+          />
+        </svg>
+        Compare
+      <% end %>
+
+      <%# New Item Button %>
+      <%= link_to "New Item",
+      new_item_path,
+      class:
+        "inline-flex items-center px-4 py-2.5 border border-transparent text-sm font-bold rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-all active:scale-95" %>
+    </div>
+  </div>
+
+  <%# Rankings List Card %>
+  <div
+    class="
+      bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden
+    "
+  >
+    <ul class="divide-y divide-gray-100">
+      <% @items.each_with_index do |item, index| %>
+        <li class="group transition-colors hover:bg-gray-50">
+          <%= link_to item_path(item), class: "flex items-center px-6 py-5" do %>
+
+            <%# Rank Badge %>
+            <div class="flex-shrink-0 w-12 flex flex-col items-center">
+              <% if index == 0 %>
+                <%# Gold Star for Rank #1 %>
+                <span class="text-yellow-500 mb-1">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    />
+                  </svg>
+                </span>
+                <span class="text-xl font-black text-gray-900 leading-none text-center">1</span>
+              <% else %>
+                <span
+                  class="
+                    text-lg font-bold text-gray-400 group-hover:text-indigo-400 transition-colors
+                    leading-none text-center
+                  "
+                >
+                  <%= index + 1 %>
+                </span>
+              <% end %>
+            </div>
+
+            <%# Item Info %>
+            <div class="ml-4 flex-grow">
+              <h3
+                class="
+                  text-lg font-bold text-gray-800 group-hover:text-indigo-600 transition-colors
+                "
+              >
+                <%= item.name %>
+              </h3>
+              <p class="text-sm text-gray-500">
+                Rating:
+                <span class="font-medium text-gray-700"><%= item.ranking %></span>
+              </p>
+            </div>
+
+            <%# Navigation Chevron %>
+            <div class="ml-4 flex-shrink-0">
+              <svg
+                class="
+                  h-5 w-5 text-gray-300 group-hover:text-indigo-500 transition-colors
+                "
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+
+      <% if @items.empty? %>
+        <li class="px-6 py-16 text-center">
+          <svg
+            class="mx-auto h-12 w-12 text-gray-300"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1"
+              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0l-8 4-8-4"
+            />
+          </svg>
+          <h3 class="mt-2 text-sm font-medium text-gray-900">No items yet</h3>
+          <p class="mt-1 text-sm text-gray-500 italic">Add your first item to start ranking!</p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%# Bottom Danger Zone %>
+  <div class="mt-16 pt-8 border-t border-gray-200 flex flex-col items-center">
+    <p class="text-xs text-gray-400 mb-4 uppercase tracking-widest font-bold">Danger Zone</p>
+    <%= button_to "Delete Category and All Items",
+    category_path(@category),
+    method: :delete,
+    data: {
+      confirm:
+        "Warning: This will delete the category and every item inside it. Are you sure?",
+    },
+    class:
+      "text-sm font-semibold text-red-400 hover:text-red-600 transition-all hover:bg-red-50 px-4 py-2 rounded-lg" %>
+  </div>
+</div>

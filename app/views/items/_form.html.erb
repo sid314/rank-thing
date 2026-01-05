@@ -1,31 +1,87 @@
-<%= form_with(model: item) do |form| %>
-  <% if item.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(item.errors.count, "error") %>
-        prohibited this item from being saved:</h2>
+<%= form_with(model: item, class: "space-y-6") do |form| %>
 
-      <ul>
-        <% item.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%# Error Messages %>
+  <% if item.errors.any? %>
+    <div class="p-4 rounded-lg bg-red-50 border border-red-200">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h2 class="text-sm font-bold text-red-800">
+            <%= pluralize(item.errors.count, "error") %>
+            prohibited this item from being saved:
+          </h2>
+          <ul class="mt-2 list-disc list-inside text-sm text-red-700 space-y-1">
+            <% item.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-  <div>
-    <%= form.label :Category, style: "display: block" %>
-    <%= form.collection_select :category_id,
-                           Category.all,
-                           :id,
-                           :name,
-                           prompt: "Select a category" %>
-  </div>
+  <%# Form Fields Content %>
+  <div class="bg-white p-8 border border-gray-200 rounded-xl shadow-sm space-y-5">
 
-  <div>
-    <%= form.submit %>
+    <%# Name Field %>
+    <div>
+      <%= form.label :name, class: "block text-sm font-semibold text-gray-700 mb-1" %>
+      <%= form.text_field :name,
+                      placeholder: "e.g. Vintage Camera",
+                      class:
+                        "block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder:text-gray-400" %>
+    </div>
+
+    <%# Category Selection %>
+    <div>
+      <%= form.label :category_id,
+                 "Assign to Category",
+                 class: "block text-sm font-semibold text-gray-700 mb-1" %>
+      <div class="relative">
+        <%= form.collection_select :category_id,
+                               Category.all,
+                               :id,
+                               :name,
+                               { prompt: "Select a category" },
+                               {
+                                 class:
+                                   "block w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none appearance-none transition-all cursor-pointer text-gray-700",
+                               } %>
+        <div
+          class="
+            pointer-events-none absolute inset-y-0 right-0 flex items-center px-3
+            text-gray-400
+          "
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <%# Submit Actions %>
+    <div class="pt-4 flex items-center gap-4">
+      <%= form.submit "Create Item",
+                  class:
+                    "cursor-pointer inline-flex justify-center px-6 py-3 border border-transparent text-sm font-bold rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all active:scale-95" %>
+
+      <%= link_to "Cancel",
+      items_path,
+      class: "text-sm font-medium text-gray-500 hover:text-gray-700" %>
+    </div>
   </div>
 <% end %>

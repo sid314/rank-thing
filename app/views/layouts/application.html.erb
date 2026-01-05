@@ -24,9 +24,9 @@
   </head>
 
   <body>
-    <% if flash[:notice] %>
-      <p class="flash"><%= flash[:notice] %></p>
-    <% end %>
-    <%= yield %>
+    <body>
+      <%= render "layouts/flash" %>
+      <%= yield %>
+    </body>
   </body>
 </html>

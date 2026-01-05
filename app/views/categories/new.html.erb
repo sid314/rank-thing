@@ -1,2 +1,36 @@
-<h1>New Category</h1>
-<%= render "form", category: @category %>
+<% content_for :title, "New Category" %>
+
+<div class="max-w-2xl mx-auto p-6">
+  <%# Navigation Breadcrumb %>
+  <nav class="mb-4">
+    <%= link_to categories_path, class: "group flex items-center text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors" do %>
+      <svg
+        class="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 19l-7-7m0 0l7-7m-7 7h18"
+        />
+      </svg>
+      Back to all categories
+    <% end %>
+  </nav>
+
+  <%# Page Header %>
+  <header class="mb-8 border-b border-gray-100 pb-6">
+    <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Create New Category</h1>
+    <p class="mt-2 text-sm text-gray-600">
+      Establish a new group to begin comparing and ranking items.
+    </p>
+  </header>
+
+  <%# The Styled Form Partial %>
+  <div class="mt-4">
+    <%= render "form", category: @category %>
+  </div>
+</div>

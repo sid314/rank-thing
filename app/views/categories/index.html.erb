@@ -1,7 +1,40 @@
-<h1>Categories</h1>
-<ul>
-  <% @categories.each do |category| %>
-    <li><%= link_to category.name, category_path(category) %></li>
-  <% end %>
-</ul>
-<%= link_to "New Category", new_category_path %>
+<div class="max-w-2xl mx-auto p-6">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Categories</h1>
+    <%= link_to "New Category",
+    new_category_path,
+    class:
+      "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors" %>
+  </div>
+
+  <ul
+    class="
+      divide-y divide-gray-200 bg-white shadow-sm border border-gray-100 rounded-lg
+    "
+  >
+    <% @categories.each do |category| %>
+      <li class="group">
+        <%= link_to category_path(category), class: "block hover:bg-gray-50 transition-colors" do %>
+          <div class="px-6 py-4 flex items-center justify-between">
+            <span class="text-lg font-medium text-gray-700 group-hover:text-indigo-600">
+              <%= category.name %>
+            </span>
+            <svg
+              class="h-5 w-5 text-gray-400 group-hover:text-indigo-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="9 5l7 7-7 7"
+              />
+            </svg>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -49,10 +49,11 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1 or /items/1.json
   def destroy
+    @category = @item.category
     @item.destroy!
 
     respond_to do |format|
-      format.html { redirect_to items_path, notice: "Item was successfully destroyed.", status: :see_other }
+      format.html { redirect_to category_path(@category), notice: "Item was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end
   end

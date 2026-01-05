@@ -1,2 +1,71 @@
-<h1>Edit Category</h1>
-<%= render "form", category: @category %>
+<% content_for :title, "Editing #{@category.name_was || "Category"}" %>
+
+<div class="max-w-2xl mx-auto p-6">
+  <%# Top Navigation Breadcrumbs %>
+  <nav class="mb-6">
+    <%= link_to category_path(@category), class: "group flex items-center text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors" do %>
+      <svg
+        class="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 19l-7-7m0 0l7-7m-7 7h18"
+        />
+      </svg>
+      Back to
+      <%= @category.name_was %>
+    <% end %>
+  </nav>
+
+  <%# Page Header %>
+  <header class="mb-8 border-b border-gray-100 pb-6">
+    <div class="flex items-center gap-4">
+      <div class="p-3 bg-indigo-50 rounded-xl">
+        <svg
+          class="w-6 h-6 text-indigo-600"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+          />
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Edit Category</h1>
+        <p class="mt-1 text-sm text-gray-500">
+          Updating
+          <span class="font-semibold text-gray-700"><%= @category.name_was %></span>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <%# The Styled Form Partial %>
+  <div class="mt-4">
+    <%= render "form", category: @category %>
+  </div>
+
+  <%# Bottom Actions %>
+  <div class="mt-10 pt-6 border-t border-gray-100 flex justify-center gap-6">
+    <%= link_to "View Category Rank List",
+    category_path(@category),
+    class:
+      "text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors" %>
+
+    <span class="text-gray-300">|</span>
+
+    <%= link_to "Cancel",
+    categories_path,
+    class: "text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors" %>
+  </div>
+</div>
