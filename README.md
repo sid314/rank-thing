@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Rank stuff
 
-Things you may want to cover:
+using [Elo rating system](https://en.wikipedia.org/wiki/Elo_rating_system)
 
-* Ruby version
+## Why I made this
 
-* System dependencies
+To rank my friends, and chocolates, and cars, and planes, you get the point
 
-* Configuration
+## How to run this
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+figure it out
