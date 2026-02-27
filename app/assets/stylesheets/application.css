@@ -253,12 +253,8 @@ label {
   }
 }
 
-.comic-btn {
-  animation: buttonBounce 0.3s ease infinite;
-}
-
 .comic-btn:hover {
-  animation: none;
+  animation: buttonBounce 0.3s ease;
 }
 
 /* POW! Impact effect for important elements */
