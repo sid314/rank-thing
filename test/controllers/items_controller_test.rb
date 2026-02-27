@@ -2,47 +2,34 @@ require "test_helper"
 
 class ItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @item = items(:one)
+    @category = Category.create!(name: "Superheroes")
+    @item = @category.items.create!(name: "Spider-Man", ranking: 1500)
   end
 
-  test "should get index" do
-    get items_url
+  test "GET show displays item" do
+    get item_path(@item)
+    assert_response :success
+    assert_select "dd", /Spider-Man/
+  end
+
+  test "GET edit shows form" do
+    get edit_item_path(@item)
     assert_response :success
   end
 
-  test "should get new" do
-    get new_item_url
-    assert_response :success
+  test "PATCH update with valid data redirects" do
+    patch item_path(@item), params: { item: { name: "Spider-Man Updated", ranking: 1600 } }
+    assert_redirected_to item_path(@item)
+    assert_equal "Item was successfully updated.", flash[:notice]
+    @item.reload
+    assert_equal "Spider-Man Updated", @item.name
   end
 
-  test "should create item" do
-    assert_difference("Item.count") do
-      post items_url, params: { item: { name: @item.name, ranking: @item.ranking } }
+  test "DELETE destroys item and redirects to category" do
+    assert_difference "Item.count", -1 do
+      delete item_path(@item)
     end
-
-    assert_redirected_to item_url(Item.last)
-  end
-
-  test "should show item" do
-    get item_url(@item)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_item_url(@item)
-    assert_response :success
-  end
-
-  test "should update item" do
-    patch item_url(@item), params: { item: { name: @item.name, ranking: @item.ranking } }
-    assert_redirected_to item_url(@item)
-  end
-
-  test "should destroy item" do
-    assert_difference("Item.count", -1) do
-      delete item_url(@item)
-    end
-
-    assert_redirected_to items_url
+    assert_redirected_to category_path(@category)
+    assert_equal "Item was successfully destroyed.", flash[:notice]
   end
 end
