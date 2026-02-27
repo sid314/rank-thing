@@ -64,6 +64,15 @@ def tiers
     "D" => @items.select { |i| i.ranking < max_rank - tier_size * 4 }
   }
 end
+def charts
+  @category = Category.find(params[:id])
+  @items = @category.items.order(ranking: :desc)
+
+  return redirect_to category_path(@category), alert: "No items to chart" if @items.empty?
+
+  @max_rank = @items.maximum(:ranking)
+  @min_rank = @items.minimum(:ranking)
+end
 def vote
   @category = Category.find(params[:id])
   winner = Item.find(params[:winner_id])

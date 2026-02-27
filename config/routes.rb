@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       get :compare
       get :tiers
+      get :charts
       get :import
       post :bulk_import
       post :vote

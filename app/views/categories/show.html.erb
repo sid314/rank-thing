@@ -29,6 +29,11 @@
         TIERS
       <% end %>
 
+      <%= link_to charts_category_path(@category), 
+          class: "comic-btn bg-[#06b6d4] text-white px-4 py-2.5 rounded-lg text-lg hover:-translate-y-0.5" do %>
+        CHARTS
+      <% end %>
+
       <%= link_to "NEW ITEM",
       new_category_item_path(@category),
       class: "comic-btn comic-btn-primary px-6 py-2.5 rounded-lg text-lg hover:-translate-y-0.5" %>
