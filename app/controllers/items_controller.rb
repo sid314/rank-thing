@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: %i[ show edit update destroy ]
+  before_action :set_category, only: %i[new create]
 
   # GET /items or /items.json
   def index
@@ -12,7 +13,11 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    @item = Item.new
+    if @category
+      @item = @category.items.build
+    else
+      @item = Item.new
+    end
   end
 
   # GET /items/1/edit
@@ -25,7 +30,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @item, notice: "Item was successfully created." }
+        format.html { redirect_to category_path(@item.category), notice: "Item was successfully created." }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -62,6 +67,10 @@ class ItemsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_item
     @item = Item.find(params.expect(:id))
+  end
+
+  def set_category
+    @category = Category.find_by(id: params[:category_id]) if params[:category_id]
   end
 
   # Only allow a list of trusted parameters through.

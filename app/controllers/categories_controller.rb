@@ -38,10 +38,31 @@ class CategoriesController < ApplicationController
   end
 def compare
   @category = Category.find(params[:id])
-  @items = @category.items.sample(2).sort_by(&:ranking).reverse
+  @items = @category.items.sample(2).shuffle
   if @items.size < 2
       redirect_to categories_path, alert: "Not enough items to compare"
   end
+end
+def tiers
+  @category = Category.find(params[:id])
+  @items = @category.items.order(ranking: :desc)
+
+  return redirect_to category_path(@category), alert: "Need at least 5 items for tier list" if @items.count < 5
+
+  rankings = @items.pluck(:ranking)
+  max_rank = rankings.max
+  min_rank = rankings.min
+  range = max_rank - min_rank
+
+  tier_size = range / 5.0
+
+  @tiers = {
+    "S" => @items.select { |i| i.ranking >= max_rank - tier_size },
+    "A" => @items.select { |i| i.ranking >= max_rank - tier_size * 2 && i.ranking < max_rank - tier_size },
+    "B" => @items.select { |i| i.ranking >= max_rank - tier_size * 3 && i.ranking < max_rank - tier_size * 2 },
+    "C" => @items.select { |i| i.ranking >= max_rank - tier_size * 4 && i.ranking < max_rank - tier_size * 3 },
+    "D" => @items.select { |i| i.ranking < max_rank - tier_size * 4 }
+  }
 end
 def vote
   @category = Category.find(params[:id])
