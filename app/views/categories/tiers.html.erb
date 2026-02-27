@@ -1,0 +1,66 @@
+<div class="max-w-4xl mx-auto p-6">
+
+  <%# Header %>
+  <nav class="mb-6">
+    <%= link_to category_path(@category), class: "comic-breadcrumb comic-link text-lg flex items-center" do %>
+      <span class="mr-2">←</span>
+      <%= @category.name.upcase %>
+    <% end %>
+  </nav>
+
+  <header class="mb-8">
+    <h1 class="text-5xl comic-title text-black transform -skew-x-3">TIER LIST</h1>
+    <p class="mt-2 text-xl text-gray-600 font-bold">
+      <span class="comic-metadata">TOTAL:</span> <%= @items.count %> ITEMS
+    </p>
+  </header>
+
+  <%# Tier Rows %>
+  <% tier_colors = { "S" => "bg-[#ef4444]", "A" => "bg-[#f97316]", "B" => "bg-[#facc15]", "C" => "bg-[#22c55e]", "D" => "bg-[#3b82f6]" } %>
+  <% tier_labels = { "S" => "S", "A" => "A", "B" => "B", "C" => "C", "D" => "D" } %>
+
+  <% ["S", "A", "B", "C", "D"].each do |tier| %>
+    <div class="flex border-2 border-black mb-0">
+      <div class="<%= tier_colors[tier] %> border-r-2 border-black px-4 py-8 flex items-center justify-center">
+        <span class="text-4xl font-black text-white comic-title"><%= tier_labels[tier] %></span>
+      </div>
+      <div class="bg-white flex-1 p-4 min-h-[100px] flex flex-wrap gap-2 items-center">
+        <% if @tiers[tier].any? %>
+          <% @tiers[tier].each do |item| %>
+            <%= link_to item_path(item), class: "comic-btn bg-white border-2 border-black px-3 py-2 text-sm hover:-translate-y-0.5" do %>
+              <%= item.name %>
+              <span class="comic-metadata ml-1"><%= item.ranking.to_i %></span>
+            <% end %>
+          <% end %>
+        <% else %>
+          <span class="text-gray-400 italic">No items</span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%# Legend %>
+  <div class="mt-8 flex flex-wrap gap-4 justify-center">
+    <div class="flex items-center gap-2">
+      <div class="w-4 h-4 bg-[#ef4444] border border-black"></div>
+      <span class="font-bold text-sm">S - Elite</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-4 h-4 bg-[#f97316] border border-black"></div>
+      <span class="font-bold text-sm">A - Great</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-4 h-4 bg-[#facc15] border border-black"></div>
+      <span class="font-bold text-sm">B - Good</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-4 h-4 bg-[#22c55e] border border-black"></div>
+      <span class="font-bold text-sm">C - Average</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-4 h-4 bg-[#3b82f6] border border-black"></div>
+      <span class="font-bold text-sm">D - Below Average</span>
+    </div>
+  </div>
+
+</div>

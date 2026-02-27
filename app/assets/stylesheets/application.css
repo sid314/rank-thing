@@ -1,10 +1,201 @@
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
+ * Comic Book Store Theme - Matching comic-portfolio styling
  */
+
+@import "tailwindcss";
+
+body {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #f4f1ea;
+  color: #18181b;
+  background-image:
+    radial-gradient(#d4d4d8 1.5px, transparent 1.5px),
+    radial-gradient(#d4d4d8 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  min-height: 100vh;
+}
+
+/* Comic Cover Container */
+.comic-panel {
+  background-color: white;
+  border: 3px solid black;
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.comic-panel:hover {
+  transform: translateY(-5px) rotate(-1deg);
+  box-shadow: 10px 10px 0px 0px black;
+  z-index: 10;
+}
+
+/* Price Tag Badge */
+.comic-badge {
+  background-color: #facc15;
+  color: black;
+  font-weight: 900;
+  padding: 4px 8px;
+  border: 2px solid black;
+  transform: rotate(-3deg);
+  display: inline-block;
+  box-shadow: 2px 2px 0px 0px black;
+}
+
+/* Buttons */
+.comic-btn {
+  font-weight: 900;
+  text-transform: uppercase;
+  border: 2px solid black;
+  box-shadow: 4px 4px 0px 0px black;
+  transition: all 0.2s ease;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.comic-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0px 0px black;
+}
+
+.comic-btn:active {
+  transform: translateY(0px);
+  box-shadow: 2px 2px 0px 0px black;
+}
+
+.comic-btn-primary {
+  background-color: #ef4444;
+  color: white;
+}
+
+.comic-btn-primary:hover {
+  background-color: #dc2626;
+}
+
+.comic-btn-secondary {
+  background-color: #facc15;
+  color: black;
+}
+
+.comic-btn-secondary:hover {
+  background-color: #eab308;
+}
+
+.comic-btn-blue {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.comic-btn-blue:hover {
+  background-color: #2563eb;
+}
+
+/* Headers */
+.comic-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-style: italic;
+  line-height: 0.9;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Breadcrumbs */
+.comic-breadcrumb {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Links */
+.comic-link {
+  color: #3b82f6;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.comic-link:hover {
+  color: #ef4444;
+}
+
+/* Inputs */
+.comic-input {
+  font-weight: 600;
+  border: 2px solid black;
+  background-color: white;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.comic-input:focus {
+  outline: none;
+  box-shadow: 4px 4px 0px 0px #3b82f6;
+}
+
+/* Flash Messages */
+.comic-flash {
+  font-weight: 900;
+  text-transform: uppercase;
+  border: 3px solid black;
+  box-shadow: 4px 4px 0px 0px black;
+}
+
+.comic-flash-notice {
+  background-color: #facc15;
+  color: black;
+}
+
+.comic-flash-alert {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* Star for #1 rank */
+.comic-star {
+  color: #facc15;
+  filter: drop-shadow(2px 2px 0px black);
+}
+
+/* Danger Button */
+.comic-danger {
+  background-color: white;
+  border: 2px solid black;
+  color: #ef4444;
+  box-shadow: 4px 4px 0px 0px black;
+}
+
+.comic-danger:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* Metadata / Tech Stack Style */
+.comic-metadata {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background-color: black;
+  color: white;
+  padding: 2px 6px;
+}
+
+/* Select dropdowns */
+select.comic-input {
+  appearance: none;
+  font-weight: 600;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23000'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  padding-right: 40px;
+}
+
+/* Labels */
+label {
+  font-weight: 800;
+  text-transform: uppercase;
+}

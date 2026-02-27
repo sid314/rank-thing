@@ -1,18 +1,13 @@
 <div id="<%= dom_id item %>" class="space-y-4">
-  <div class="border-b border-gray-100 pb-4">
-    <dt class="text-sm font-medium text-gray-500 uppercase tracking-wider">Item Name</dt>
-    <dd class="mt-1 text-2xl font-bold text-gray-900"><%= item.name %></dd>
+  <div class="border-b-2 border-black pb-4">
+    <dt class="text-lg font-bold text-gray-500 uppercase tracking-wider">NAME</dt>
+    <dd class="mt-1 text-4xl comic-title text-black transform -skew-x-3"><%= item.name %></dd>
   </div>
 
   <div class="flex items-center space-x-3">
-    <dt class="text-sm font-medium text-gray-500">Rating:</dt>
-    <dd
-      class="
-        inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold
-        bg-indigo-100 text-indigo-700
-      "
-    >
-      #<%= item.ranking %>
+    <dt class="text-lg font-bold text-gray-500">POWER LEVEL:</dt>
+    <dd class="comic-btn bg-[#3b82f6] text-white px-4 py-2 rounded-lg text-xl hover:-translate-y-0.5">
+      <%= item.ranking.to_i %>
     </dd>
   </div>
 </div>

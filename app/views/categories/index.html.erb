@@ -1,40 +1,34 @@
 <div class="max-w-2xl mx-auto p-6">
   <div class="flex items-center justify-between mb-8">
-    <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Categories</h1>
-    <%= link_to "New Category",
+    <h1 class="text-5xl comic-title text-black transform -skew-x-3">Categories</h1>
+    <%= link_to "+ New Category",
     new_category_path,
-    class:
-      "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors" %>
+    class: "comic-btn comic-btn-primary px-6 py-3 text-lg rounded-lg hover:-translate-y-0.5" %>
   </div>
 
-  <ul
-    class="
-      divide-y divide-gray-200 bg-white shadow-sm border border-gray-100 rounded-lg
-    "
-  >
-    <% @categories.each do |category| %>
-      <li class="group">
-        <%= link_to category_path(category), class: "block hover:bg-gray-50 transition-colors" do %>
-          <div class="px-6 py-4 flex items-center justify-between">
-            <span class="text-lg font-medium text-gray-700 group-hover:text-indigo-600">
-              <%= category.name %>
-            </span>
-            <svg
-              class="h-5 w-5 text-gray-400 group-hover:text-indigo-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+  <div class="comic-panel">
+    <ul class="divide-y-0">
+      <% @categories.each do |category| %>
+        <li class="group">
+          <%= link_to category_path(category), class: "block hover:bg-[#f4f1ea] transition-colors" do %>
+            <div class="px-6 py-5 flex items-center justify-between">
+              <span class="text-2xl font-bold text-black group-hover:text-[#ef4444] comic-title">
+                <%= category.name %>
+              </span>
+              <span class="comic-btn comic-btn-secondary px-3 py-1 text-sm rounded hover:-translate-y-0.5">
+                ENTER
+              </span>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <% if @categories.empty? %>
+    <div class="comic-panel p-12 text-center mt-6">
+      <p class="text-2xl comic-title text-gray-500">No categories yet!</p>
+      <p class="mt-2 text-lg font-bold text-gray-500">Create your first category to start ranking.</p>
+    </div>
+  <% end %>
 </div>

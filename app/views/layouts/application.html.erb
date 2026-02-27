@@ -9,6 +9,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
@@ -23,10 +27,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <body>
-      <%= render "layouts/flash" %>
-      <%= yield %>
-    </body>
+  <body class="comic-body">
+    <%= render "layouts/flash" %>
+    <%= yield %>
   </body>
 </html>
