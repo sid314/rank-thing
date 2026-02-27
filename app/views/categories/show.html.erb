@@ -15,32 +15,32 @@
 
     <div class="flex flex-wrap items-center gap-3">
       <%= link_to edit_category_path(@category), 
-          class: "comic-btn comic-btn-secondary px-4 py-2.5 rounded-lg text-lg hover:-translate-y-0.5" do %>
+          class: "comic-btn comic-btn-secondary px-4 py-2.5 rounded-lg text-lg comic-pop-in stagger-1" do %>
         EDIT
       <% end %>
 
       <%= link_to compare_category_path(@category), 
-          class: "comic-btn comic-btn-blue px-4 py-2.5 rounded-lg text-lg hover:-translate-y-0.5" do %>
+          class: "comic-btn comic-btn-blue px-4 py-2.5 rounded-lg text-lg comic-pop-in stagger-2" do %>
         COMPARE
       <% end %>
 
       <%= link_to tiers_category_path(@category), 
-          class: "comic-btn bg-[#a855f7] text-white px-4 py-2.5 rounded-lg text-lg hover:-translate-y-0.5" do %>
+          class: "comic-btn bg-[#a855f7] text-white px-4 py-2.5 rounded-lg text-lg comic-pop-in stagger-3" do %>
         TIERS
       <% end %>
 
       <%= link_to charts_category_path(@category), 
-          class: "comic-btn bg-[#06b6d4] text-white px-4 py-2.5 rounded-lg text-lg hover:-translate-y-0.5" do %>
+          class: "comic-btn bg-[#06b6d4] text-white px-4 py-2.5 rounded-lg text-lg comic-pop-in stagger-4" do %>
         CHARTS
       <% end %>
 
       <%= link_to "NEW ITEM",
       new_category_item_path(@category),
-      class: "comic-btn comic-btn-primary px-6 py-2.5 rounded-lg text-lg hover:-translate-y-0.5" %>
+      class: "comic-btn comic-btn-primary px-6 py-2.5 rounded-lg text-lg comic-pop-in stagger-5" %>
 
       <%= link_to "IMPORT",
       import_category_path(@category),
-      class: "comic-btn bg-[#22c55e] text-white px-4 py-2.5 rounded-lg text-lg hover:-translate-y-0.5" %>
+      class: "comic-btn bg-[#22c55e] text-white px-4 py-2.5 rounded-lg text-lg comic-pop-in stagger-6" %>
     </div>
   </div>
 
@@ -48,7 +48,7 @@
   <div class="comic-panel">
     <ul class="divide-y-0">
       <% @items.each_with_index do |item, index| %>
-        <li class="group transition-colors hover:bg-[#f4f1ea]">
+        <li class="group transition-colors hover:bg-[#f4f1ea] comic-pop-in stagger-<%= [index + 1, 10].min %>">
           <%= link_to item_path(item), class: "flex items-center px-6 py-5" do %>
 
             <%# Rank Badge %>

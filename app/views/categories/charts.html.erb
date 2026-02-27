@@ -17,7 +17,7 @@
 
   <%# Bar Chart %>
   <div class="comic-panel p-8 space-y-4">
-    <% @items.each do |item| %>
+    <% @items.each_with_index do |item, index| %>
       <% bar_width = ((item.ranking.to_f - @min_rank) / (@max_rank - @min_rank) * 80 + 20).round if @max_rank != @min_rank %>
       <% bar_width = 50 if @max_rank == @min_rank %>
       
@@ -34,7 +34,7 @@
         <% bar_color = "bg-[#3b82f6]" %>
       <% end %>
 
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 slam-down" style="animation-delay: <%= index * 0.05 %>s">
         <span class="w-32 text-lg font-bold truncate text-right"><%= item.name %></span>
         <div class="flex-1 h-10 bg-gray-100 border-2 border-black relative">
           <div class="<%= bar_color %> h-full border-r-2 border-black" style="width: <%= bar_width %>%"></div>

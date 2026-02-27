@@ -2,8 +2,8 @@
 
   <%# Header %>
   <div class="text-center mb-12">
-    <p class="comic-btn bg-[#facc15] text-black px-4 py-1 rounded inline-block text-lg mb-4 transform rotate-2">FIGHT!</p>
-    <h1 class="text-5xl comic-title text-black transform -skew-x-3">WHO WINS?</h1>
+    <p class="comic-btn bg-[#facc15] text-black px-4 py-1 rounded inline-block text-lg mb-4 transform rotate-2 pow-impact">FIGHT!</p>
+    <h1 class="text-5xl comic-title text-black transform -skew-x-3 pow-impact">WHO WINS?</h1>
   </div>
 
   <%# The Duel Container %>
@@ -11,19 +11,19 @@
 
     <%# VS Badge (Desktop) %>
     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center z-10">
-      <div class="bg-[#ef4444] border-2 border-black rounded-full w-20 h-20 flex items-center justify-center shadow-[4px_4px_0px_0px_black]">
+      <div class="bg-[#ef4444] border-2 border-black rounded-full w-20 h-20 flex items-center justify-center shadow-[4px_4px_0px_0px_black] slam-down">
         <span class="text-white font-black italic text-2xl">VS</span>
       </div>
     </div>
 
     <% @items.each_with_index do |item, index| %>
-      <div class="flex-1 w-full">
+      <div class="flex-1 w-full compare-enter" style="animation-delay: <%= index * 0.1 %>s">
         <%= button_to vote_category_path(@category), 
             params: { winner_id: item.id, loser_id: (@items - [item]).first.id }, 
             method: :post,
-            class: "group w-full relative hover:-translate-y-0.5" do %>
+            class: "group w-full relative" do %>
 
-          <div class="comic-panel h-72 flex flex-col items-center justify-center p-8 text-center">
+          <div class="comic-panel h-72 flex flex-col items-center justify-center p-8 text-center vote-btn">
             <%# Circular Icon/Initials %>
             <div class="w-20 h-20 mb-4 rounded-full bg-[#f4f1ea] border-2 border-black flex items-center justify-center">
               <span class="text-4xl font-black text-black">
@@ -46,7 +46,7 @@
 
       <% if index == 0 %>
         <div class="md:hidden flex items-center justify-center">
-          <span class="bg-[#ef4444] text-white font-black italic text-3xl px-4 py-2 rounded">VS</span>
+          <span class="bg-[#ef4444] text-white font-black italic text-3xl px-4 py-2 rounded slam-down">VS</span>
         </div>
       <% end %>
     <% end %>

@@ -3,19 +3,19 @@
     <h1 class="text-5xl comic-title text-black transform -skew-x-3">Categories</h1>
     <%= link_to "+ New Category",
     new_category_path,
-    class: "comic-btn comic-btn-primary px-6 py-3 text-lg rounded-lg hover:-translate-y-0.5" %>
+    class: "comic-btn comic-btn-primary px-6 py-3 text-lg rounded-lg comic-pop-in" %>
   </div>
 
   <div class="comic-panel">
     <ul class="divide-y-0">
-      <% @categories.each do |category| %>
-        <li class="group">
+      <% @categories.each_with_index do |category, index| %>
+        <li class="group comic-pop-in stagger-<%= [index + 1, 10].min %>">
           <%= link_to category_path(category), class: "block hover:bg-[#f4f1ea] transition-colors" do %>
             <div class="px-6 py-5 flex items-center justify-between">
               <span class="text-2xl font-bold text-black group-hover:text-[#ef4444] comic-title">
                 <%= category.name %>
               </span>
-              <span class="comic-btn comic-btn-secondary px-3 py-1 text-sm rounded hover:-translate-y-0.5">
+              <span class="comic-btn comic-btn-secondary px-3 py-1 text-sm rounded">
                 ENTER
               </span>
             </div>

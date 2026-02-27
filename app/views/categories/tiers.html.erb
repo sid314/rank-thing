@@ -19,15 +19,15 @@
   <% tier_colors = { "S" => "bg-[#ef4444]", "A" => "bg-[#f97316]", "B" => "bg-[#facc15]", "C" => "bg-[#22c55e]", "D" => "bg-[#3b82f6]" } %>
   <% tier_labels = { "S" => "S", "A" => "A", "B" => "B", "C" => "C", "D" => "D" } %>
 
-  <% ["S", "A", "B", "C", "D"].each do |tier| %>
-    <div class="flex border-2 border-black mb-0">
+  <% ["S", "A", "B", "C", "D"].each_with_index do |tier, index| %>
+    <div class="flex border-2 border-black mb-0 slam-down" style="animation-delay: <%= index * 0.1 %>s">
       <div class="<%= tier_colors[tier] %> border-r-2 border-black px-4 py-8 flex items-center justify-center">
         <span class="text-4xl font-black text-white comic-title"><%= tier_labels[tier] %></span>
       </div>
       <div class="bg-white flex-1 p-4 min-h-[100px] flex flex-wrap gap-2 items-center">
         <% if @tiers[tier].any? %>
           <% @tiers[tier].each do |item| %>
-            <%= link_to item_path(item), class: "comic-btn bg-white border-2 border-black px-3 py-2 text-sm hover:-translate-y-0.5" do %>
+            <%= link_to item_path(item), class: "comic-btn bg-white border-2 border-black px-3 py-2 text-sm comic-pop-in" do %>
               <%= item.name %>
               <span class="comic-metadata ml-1"><%= item.ranking.to_i %></span>
             <% end %>
