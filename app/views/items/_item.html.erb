@@ -4,10 +4,10 @@
     <dd class="mt-1 text-4xl comic-title text-black transform -skew-x-3"><%= item.name %></dd>
   </div>
 
-  <div class="flex items-center space-x-3">
-    <dt class="text-lg font-bold text-gray-500">POWER LEVEL:</dt>
-    <dd class="comic-btn bg-[#3b82f6] text-white px-4 py-2 rounded-lg text-xl hover:-translate-y-0.5">
+  <div class="flex items-center gap-3">
+    <span class="text-lg font-bold text-gray-500 uppercase">POWER LEVEL:</span>
+    <span class="bg-[#3b82f6] text-white px-4 py-2 rounded-lg text-xl font-black border-2 border-black">
       <%= item.ranking.to_i %>
-    </dd>
+    </span>
   </div>
 </div>

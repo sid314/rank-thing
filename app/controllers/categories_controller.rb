@@ -72,6 +72,22 @@ def vote
 
   redirect_to compare_category_path(@category), notice: "Vote recorded!"
 end
+def import
+  @category = Category.find(params[:id])
+end
+def bulk_import
+  @category = Category.find(params[:id])
+  names = params[:names].split("\n").map(&:strip).reject(&:empty?)
+
+  count = 0
+  names.each do |name|
+    @category.items.create!(name: name, ranking: 1200)
+    count += 1
+  end
+
+  flash[:notice] = "#{count} items imported successfully!"
+  redirect_to category_path(@category)
+end
   def category_params
     params.require(:category).permit(:name)
   end

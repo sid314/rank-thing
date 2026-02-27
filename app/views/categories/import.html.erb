@@ -1,0 +1,35 @@
+<div class="max-w-2xl mx-auto p-6">
+
+  <nav class="mb-6">
+    <%= link_to category_path(@category), class: "comic-breadcrumb comic-link text-lg flex items-center" do %>
+      <span class="mr-2">←</span>
+      <%= @category.name.upcase %>
+    <% end %>
+  </nav>
+
+  <header class="mb-8">
+    <h1 class="text-5xl comic-title text-black transform -skew-x-3">IMPORT ITEMS</h1>
+    <p class="mt-2 text-xl text-gray-600 font-bold">
+      Paste item names, one per line
+    </p>
+  </header>
+
+  <%= form_with(url: bulk_import_category_path(@category), method: :post, local: true) do |f| %>
+    <div class="comic-panel p-8 space-y-5">
+      <div>
+        <%= f.label :names, "ITEM NAMES", class: "block text-xl font-bold text-black mb-2" %>
+        <%= f.text_area :names, 
+                     rows: 10,
+                     placeholder: "Item 1\nItem 2\nItem 3",
+                     class: "comic-input block w-full px-4 py-3 rounded-lg text-xl font-bold h-64" %>
+        <p class="mt-2 text-lg text-gray-600 font-bold">Each line will become a separate item</p>
+      </div>
+
+      <div class="pt-6 flex items-center gap-4 border-t-2 border-black mt-6">
+        <%= f.submit "IMPORT", class: "comic-btn comic-btn-primary px-8 py-3 rounded-lg text-xl hover:-translate-y-0.5" %>
+        <%= link_to "CANCEL", category_path(@category), class: "comic-btn comic-btn-secondary px-6 py-3 rounded-lg text-xl hover:-translate-y-0.5" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
