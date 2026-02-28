@@ -18,6 +18,23 @@ Rails.application.routes.draw do
   end
   root "categories#index"
 
+  # API v1 routes for TUI clients
+  namespace :api do
+    namespace :v1 do
+      resources :categories do
+        member do
+          get :compare
+          post :vote
+          get :tiers
+          get :charts
+        end
+        resources :items, only: [:create]
+        post :bulk_import, on: :member
+      end
+      resources :items, only: [:show, :update, :destroy]
+    end
+  end
+
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker

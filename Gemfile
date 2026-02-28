@@ -67,3 +67,6 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 4.4"
+
+# CORS support for API clients (TUI, mobile apps, etc.)
+gem "rack-cors"
